@@ -3,7 +3,7 @@ const { Tag, Product, ProductTag } = require('../../models');
 
 // The `/api/tags` endpoint
 
-router.get('/', (req, res) => {
+router.get('/', async(req, res) => {
   const tag = await Tag.findAll().catch((err) => {
     res.json(err);
   });
@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
   // be sure to include its associated Product data
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async(req, res) => {
   const tagId = await Tag.findOne().catch((err) => {
     res.json(err)
   });
@@ -21,7 +21,7 @@ router.get('/:id', (req, res) => {
   // be sure to include its associated Product data
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const tagger = await Tag.create(req.body);
     // 200 status code means the request is successful
@@ -33,7 +33,7 @@ router.post('/', (req, res) => {
   // create a new tag
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', async(req, res) => {
   // update a tag's name by its `id` value
   Tag.update(
     {
@@ -53,7 +53,7 @@ router.put('/:id', (req, res) => {
     })
     .catch((err) => res.json(err));
 });
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   Tag.destroy({
     where: {
       id: req.params.id,

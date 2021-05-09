@@ -21,7 +21,7 @@ router.get('/:id', (req, res) => {
   // be sure to include its associated Products
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const catty = await Category.create(req.body);
     // 200 status code means the request is successful
@@ -33,7 +33,7 @@ router.post('/', (req, res) => {
   // create a new category
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
   // update a category by its `id` value
   Category.update(
     {
