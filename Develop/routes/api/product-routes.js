@@ -5,18 +5,18 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // get all products
 router.get('/', async (req, res) => {
-  
-    const products = await Product.findAll().catch((err) => {
-      res.json(err);
-    }); 
-    res.json(products);
+
+  const products = await Product.findAll().catch((err) => {
+    res.json(err);
+  });
+  res.json(products);
   // find all products
   // be sure to include its associated Category and Tag data
 });
 
 // get one product
 router.get('/:id', (req, res) => {
-  const pId = await Product.findOne().catch((err)=>{
+  const pId = await Product.findOne().catch((err) => {
     res.json(err)
   });
   res.json(pId);
@@ -99,6 +99,15 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
+  Product.destroy({
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((pId) => {
+      res.json(pId);
+    })
+    .catch((err) => res.json(err));
   // delete one product by its `id` value
 });
 
